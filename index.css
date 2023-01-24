@@ -1,8 +1,11 @@
 .logo {
+  border-radius: 25px;
   width: 100px;
-  background-color: aliceblue;
+  padding-top: 4px;
+  margin-left: 4px;
 }
 .header {
+  border-radius: 25px;
   border: 1px Solid Black;
   margin: 10px;
   justify-content: space-between;
@@ -15,6 +18,22 @@
   list-style-type: none;
 }
 
-.nav-items > ul > li {
+.nav-items > ul > a > li {
   padding: 20px;
+  color: white;
+}
+
+.card {
+  border-radius: 25px;
+  border: 1px Solid Black;
+  padding: 10px;
+  margin: 10px;
+  width: 200px;
+}
+.restaurant-list {
+  display: flex;
+  flex-wrap: wrap;
+}
+.card-img {
+  width: 100%;
 }
