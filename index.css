@@ -1,0 +1,20 @@
+.logo {
+  width: 100px;
+  background-color: aliceblue;
+}
+.header {
+  border: 1px Solid Black;
+  margin: 10px;
+  justify-content: space-between;
+  display: flex;
+  background-color: darkslategray;
+}
+
+.nav-items > ul {
+  display: flex;
+  list-style-type: none;
+}
+
+.nav-items > ul > li {
+  padding: 20px;
+}

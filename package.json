@@ -1,0 +1,30 @@
+{
+  "name": "my-namestey-react",
+  "version": "1.0.0",
+  "description": "",
+  "main": "App.js",
+  "scripts": {
+    "start": "parcel index.html",
+    "build": "parcel build index.html",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/HarpreetSaini02/My-Namestey-React.git"
+  },
+  "author": "Harpreet Saini",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/HarpreetSaini02/My-Namestey-React/issues"
+  },
+  "homepage": "https://github.com/HarpreetSaini02/My-Namestey-React#readme",
+  "devDependencies": {
+    "babel-plugin-transform-remove-console": "^6.9.4",
+    "parcel": "^2.8.3"
+  },
+  "dependencies": {
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-router-dom": "^6.7.0"
+  }
+}
