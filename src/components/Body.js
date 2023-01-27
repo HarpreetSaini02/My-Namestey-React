@@ -1,37 +1,75 @@
-import { joinPaths } from "@remix-run/router";
-import { CARD_IMG,IMG_CDN_URL,restaurantList} from "../../Constants";
+import { restaurantList } from "../../Constants";
+import RestaurantCard from "./RestaurantCard";
+import { useEffect, useState } from "react";
+import Shimmer from "./Shimmer";
+import { Link } from "react-router-dom";
 
-const RestaurantCard = ({ name, cuisines, avgRating, cloudinaryImageId }) => {
-  return (
-    <div className="card">
-      <img className="card-img" src={IMG_CDN_URL + cloudinaryImageId} />
-      <h3> {name} </h3>
-      <h4> {cuisines.join(", ")} </h4>
-      <h4> {avgRating} stars</h4>
-    </div>
+function filterData(searchText, restaurants) {
+  const filterData = restaurants.filter((restaurant) =>
+    restaurant?.data?.name?.toLowerCase().includes(searchText.toLowerCase())
   );
-};
+  return filterData;
+}
+
 const Body = () => {
+  const [searchText, setSearchText] = useState("");
+  const [filteredRestaurants, setFilteredRestaurants] = useState([]);
+  const [allRestaurants, setAllRestaurants] = useState([]);
+  useEffect(() => {
+    //API Call
+    getRestaurants();
+  }, []);
+
+  async function getRestaurants() {
+    const data = await fetch(
+      "https://www.swiggy.com/dapi/restaurants/list/v5?lat=12.970783904810569&lng=77.73630939424038&page_type=DESKTOP_WEB_LISTING"
+    );
+    const json = await data.json();
+    console.log(json);
+    setFilteredRestaurants(json?.data?.cards[2]?.data?.data?.cards);
+    setAllRestaurants(json?.data?.cards[2]?.data?.data?.cards);
+  }
+
+  // not render component (Early return)
+  if (!allRestaurants) return <Shimmer />;
+
   return (
-    <div className="restaurant-list">
-{
-    restaurantList.map(restaurant=>{
-        return (
-            <RestaurantCard {...restaurant?.data} key = {restaurant.data.id}/>
-        )
-    }
-    )
-    }
-    {/* <RestaurantCard {...restaurantList[0]?.data}/>
-    <RestaurantCard {...restaurantList[1].data}/>
-    <RestaurantCard {...restaurantList[2].data}/>
-    <RestaurantCard {...restaurantList[3].data}/>
-    <RestaurantCard {...restaurantList[4].data}/> */}
-      {/* <RestaurantCard name={restaurantList[0]?.data?.name} cuisines={restaurantList[0]?.data?.cuisines} cloudinaryImageId={restaurantList[0]?.data?.cloudinaryImageId}/>
-      <RestaurantCard  name={restaurantList[1]?.data?.name} cuisines={restaurantList[1]?.data?.cuisines} cloudinaryImageId={restaurantList[1]?.data?.cloudinaryImageId} />
-      <RestaurantCard  name={restaurantList[2]?.data?.name} cuisines={restaurantList[2]?.data?.cuisines}  cloudinaryImageId={restaurantList[2]?.data?.cloudinaryImageId}/>
-      */}
-    </div>
+    <>
+      <div className="search-container">
+        <input
+          type="text"
+          className="search-input"
+          placeholder="Search"
+          value={searchText}
+          onChange={(e) => {
+            setSearchText(e.target.value);
+          }}
+        />
+        <button
+          className="search-button"
+          onClick={() => {
+            const data = filterData(searchText, allRestaurants);
+            setFilteredRestaurants(data);
+          }}
+        >
+          Search
+        </button>
+      </div>
+      <div className="restaurant-list">
+        {/* if (filteredRestaurants?.length === 0) return{" "}
+        <h1>No Restraunt match your Filter!!</h1>; */}
+        {filteredRestaurants.map((restaurant) => {
+          return (
+            <Link
+              to={"/restaurants/" + restaurant?.data?.id}
+              key={restaurant?.data?.id}
+            >
+              <RestaurantCard {...restaurant?.data} />
+            </Link>
+          );
+        })}
+      </div>
+    </>
   );
 };
 

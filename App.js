@@ -8,6 +8,7 @@ import Error from "./src/components/Error";
 import AboutUs from "./src/components/AboutUs";
 import Home from "./src/components/Home";
 import Contact from "./src/components/Contact";
+import RestaurantMenu from "./src/components/RestaurantMenu";
 
 
 const AppLayout = () => {
@@ -42,6 +43,10 @@ const appRouter = createBrowserRouter([
         path: "/contact",
         element: <Contact />,
       },
+      {
+        path:"/restaurants/:resId",
+        element: <RestaurantMenu />,
+      }
     ]
   },
  

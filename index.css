@@ -37,3 +37,23 @@
 .card-img {
   width: 100%;
 }
+.search-container > input{
+  border-radius: 25px;
+  margin: 10px;
+  width: 200px;
+  height: 30px;
+}
+.search-button{
+  width: 90px;
+  height: 30px;
+}
+.shimmer-card{
+  width: 200px;
+  height: 200px;
+  background: darkgray;
+  margin: 20px;
+  display: inline-block;
+}
+.menu{
+  display: flex;
+}
