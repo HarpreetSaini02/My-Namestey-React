@@ -53,6 +53,7 @@
   background: darkgray;
   margin: 20px;
   display: inline-block;
+  border-radius: 25px;
 }
 .menu{
   display: flex;
