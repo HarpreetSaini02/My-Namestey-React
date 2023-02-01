@@ -4,13 +4,10 @@ import { IMG_CDN_URL } from "../../Constants";
 import Shimmer from "./Shimmer";
 import useRestaurant from "../utils/usseRestaurant";
 
-
 const RestaurantMenu = () => {
   const { resId } = useParams();
- // const [restaurant, setRestaurant] = useState(null);
-const restaurant = useRestaurant(resId);
+  const restaurant = useRestaurant(resId);
 
-  
   if (!restaurant) return <Shimmer />;
   return (
     <div className="menu">
