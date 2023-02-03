@@ -1,10 +1,8 @@
 import { HEADER_IMG_URL } from "../../Constants";
 import { Link } from "react-router-dom";
-import AboutUs from "./AboutUs";
-import Home from "./Home";
-import Contact from "./Contact";
-import React , {useState} from "react";
+import React , {useState, useContext} from "react";
 import useOnline from "../utils/useOnline";
+import UserContext from "../utils/UserContext";
 export const Title = () => {
   return (
     <a href="/">
@@ -16,6 +14,7 @@ export const Title = () => {
 const Header = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const isOnline = useOnline();
+  const { users } = useContext(UserContext);
   return (
     <div className="header">
       <Title />
@@ -40,11 +39,13 @@ const Header = () => {
         </ul>
       </div>
       <h1>{isOnline ? "✅" : "🔴"}</h1>
+      <h1 className="user"> {users.name} </h1>
       {isLoggedIn ?(
         <button onClick={() => setIsLoggedIn(false)}>Logout</button>
       ):(
         <button onClick={() => setIsLoggedIn(true)}>Login</button>
       )}
+    
     </div>
   );
 };

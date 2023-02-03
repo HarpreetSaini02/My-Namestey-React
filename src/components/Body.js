@@ -1,15 +1,17 @@
 import { restaurantList } from "../../Constants";
 import RestaurantCard from "./RestaurantCard";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import Shimmer from "./Shimmer";
 import { Link } from "react-router-dom";
 import { filterData } from "../utils/helper";
 import useOnline from "../utils/useOnline";
+import UserContext from "../utils/UserContext";
 
 const Body = () => {
   const [searchText, setSearchText] = useState("");
   const [filteredRestaurants, setFilteredRestaurants] = useState([]);
   const [allRestaurants, setAllRestaurants] = useState([]);
+  const {users, setUser} = useContext(UserContext);
   useEffect(() => {
     //API Call
     getRestaurants();
@@ -54,6 +56,30 @@ const Body = () => {
         >
           Search
         </button>
+
+        <input 
+        type="text"
+        value={users.name}
+        onChange={(e)=>setUser(
+          {
+            ...users,
+            name: e.target.value,
+            
+          }
+        )}
+        /> 
+        <input 
+        type="text"
+        value={users.email}
+        onChange={(e)=>setUser(
+          {
+            ...users,
+            email: e.target.value,
+           
+          }
+        )}
+        /> 
+       
       </div>
       <div className="restaurant-list">
         {/* if (filteredRestaurants?.length === 0) return{" "}
